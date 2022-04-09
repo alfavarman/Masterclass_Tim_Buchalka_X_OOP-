@@ -13,9 +13,8 @@ class Account:
     def __init__(self, name, balance=0):
         self.name = name
         self.balance = balance
-        self.transaction_list = []
+        self.transaction_list = [(Account._current_time(), balance)]
         print(f"Account created for {self.name} with initial balance of {balance}")
-        self.transaction_list.append((Account._current_time(), balance))
 
     def deposit(self, amount):
         if amount >= 0:
