@@ -19,7 +19,7 @@ class Account:
         if amount >= 0:
             self.balance += amount
             print(f'You deposited {amount}. Your Current Balance is: {self.balance}')
-            self.transaction_list.append((pytz.utc.localize(datetime.datetime.utcnow()), amount))
+            self.transaction_list.append((Account._current_time(), amount))
 
     def withdraw(self, amount):
         if amount > self.balance:
@@ -29,7 +29,7 @@ class Account:
         elif amount >=0:
             self.balance -= amount
             print(f'You withdraw {amount}. Current Balance:{self.balance}')
-            # self.transaction_list.append((pytz.utc.localize(datetime.datetime.utcnow()), amount))
+            self.transaction_list.append((Account._current_time(), -amount))
 
     def show_balance(self):
         print(f'Your account balance is: {self.balance}')
