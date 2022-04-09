@@ -1,6 +1,7 @@
 import datetime
 import pytz
 
+
 class Account:
     """Account class with balance"""
 
@@ -9,11 +10,12 @@ class Account:
         utc_time = datetime.datetime.utcnow()
         return pytz.utc.localize(utc_time)
 
-    def __init__(self, name, balance):
+    def __init__(self, name, balance=0):
         self.name = name
         self.balance = balance
         self.transaction_list = []
-        print(f"account created for {self.name}")
+        print(f"Account created for {self.name} with initial balance of {balance}")
+        self.transaction_list.append((Account._current_time(), balance))
 
     def deposit(self, amount):
         if amount >= 0:
@@ -23,12 +25,12 @@ class Account:
 
     def withdraw(self, amount):
         if amount > self.balance:
-            print(f'Amount: {amount} exceeds available balance ')
+            print(f'Withdraw request of: {amount} exceeds available balance ')
             self.show_balance()
             # self.transaction_list.append((pytz.utc.localize(datetime.datetime.utcnow())))
         elif amount >=0:
             self.balance -= amount
-            print(f'You withdraw {amount}. Current Balance:{self.balance}')
+            print(f'You withdraw {amount}. Current Balance: {self.balance}')
             self.transaction_list.append((Account._current_time(), -amount))
 
     def show_balance(self):
@@ -54,3 +56,9 @@ if __name__ == '__main__':
     Charles.withdraw(12)
     # Charles.show_balance()
     Charles.show_transactions()
+    print('#' * 60)
+
+    Luq = Account('Luq', 800)
+    Luq.deposit(350)
+    Luq.withdraw(200)
+    Luq.show_transactions()
