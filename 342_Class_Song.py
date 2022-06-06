@@ -8,8 +8,6 @@ class Song:
         """
 
     def __init__(self, title, artist, duration=0):
-        """"
-        """
         self.title = title
         self.artist = artist
         self.duration = duration
@@ -19,7 +17,7 @@ class Album:
     """Class to represent album using its tracks list.
 
     Attributes:
-        album_name (str): the name of the album.
+        name (str): the name of the album.
         year (int): the year was album released.
         artist (Artist): the artist responsible for album. If not
         specified the artist will be default to the 'Various Artists'.
@@ -29,8 +27,8 @@ class Album:
         add_song: use to add song to the Album's track list.
     """
 
-    def __init__(self, album_name, year, artist=None):
-        self.album_name = album_name
+    def __init__(self, name, year, artist=None):
+        self.name = name
         self.year = year
         if artist is None:
             self.artist = Artist('Various Artist')
@@ -48,7 +46,8 @@ class Album:
         if position is None:
             self.tracks.append(song)
         else:
-            self.trakcs.insert(position, song)
+            self.tracks.insert(position, song)
+
 
 class Artist:
     """Class to store artist details:
@@ -85,6 +84,31 @@ def load_data():
             artist_field, album_field, year_field, song_field = tuple(line.strip('\n').split('\t'))
             year_field = int(year_field)
             print(artist_field, album_field, year_field, song_field)
+
+            if new_artist is None:
+                new_artist = Artist(artist_field)
+            elif new_artist.name != artist_field:
+                new_artist.add_album(new_album)
+                artist_list.append(new_artist)
+                new_artist = Artist(artist_field)
+                new_album = None
+
+            if new_album is None:
+                new_album = Album(album_field, year_field, new_artist)
+            elif new_album.name != album_field:
+                new_artist.add_album(new_album)
+                new_album = Album(album_field, year_field, new_artist)
+
+            new_song = Song(song_field, new_artist)
+            new_album.add_song(new_song)
+
+        if new_artist is not None:
+            if new_album is not None:
+                new_artist.add_album(new_album)
+            artist_list.append(new_artist)
+    return artist_list
+
+
 
 
 if __name__ == '__main__':
