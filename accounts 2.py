@@ -2,8 +2,14 @@ import datetime
 import time
 import pytz
 
-class Account:
 
+class Account:
+    """Account is i"""
+
+    @staticmethod
+    def _current_time():                    # _infornt of name make it hidden
+        utc_time = datetime.datetime.utcnow()
+        return pytz.utc.localize(utc_time)
 
     def __init__(self, name, balance):
         self.name = name
@@ -16,14 +22,14 @@ class Account:
             self.balance += amount
             print(f'{amount} Successfully deposited into {self.name} Account.')
             self.show_balance()
-            self.transaction_list.append((pytz.utc.localize(datetime.datetime.utcnow()), amount))
+            self.transaction_list.append((Account._current_time(), amount))
 
     def withdraw(self, amount):
         if 0 < amount <= self.balance:
             self.balance -= amount
             print(f'{amount} Successfully withdrawn from {self.name} Account.')
             self.show_balance()
-            self.transaction_list.append((pytz.utc.localize(datetime.datetime.utcnow()), (-amount)))
+            self.transaction_list.append((Account._current_time(), -amount))
         else:
             print(f'Invalid operation. Insufficient funds')
 
