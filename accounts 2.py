@@ -31,7 +31,8 @@ class Account:
             self.show_balance()
             self.transaction_list.append((Account._current_time(), -amount))
         else:
-            print(f'Invalid operation. Insufficient funds')
+            print(f'You failed to withdrawn {amount}. Insufficient funds on your account.')
+            self.show_balance()
 
     def show_balance(self):
         print(f'Current Balance is: {self.balance}')
@@ -51,7 +52,9 @@ luq.deposit(300)
 luq.show_balance()
 luq.deposit(3000)
 luq.show_balance()
+print('code: luq.balance = 0.1 #hacker attack')
+luq.balance = 0.1
 luq.withdraw(4000)
 luq.withdraw(2340)
-luq.show_balance()
+
 luq.show_transactions()
