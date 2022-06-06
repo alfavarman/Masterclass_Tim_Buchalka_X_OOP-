@@ -12,22 +12,22 @@ class Account:
         return pytz.utc.localize(utc_time)
 
     def __init__(self, name, balance):
-        self.name = name
-        self.balance = balance
+        self.__name = name
+        self.__balance = balance
         self.transaction_list = [(Account._current_time(), balance)]
-        print(f'Account Created For {self.name} with Initial Balance: {self.balance}')
+        print(f'Account Created For {self.__name} with Initial Balance: {self.__balance}')
 
     def deposit(self, amount):
         if 0 < amount:
-            self.balance += amount
-            print(f'{amount} Successfully deposited into {self.name} Account.')
+            self.__balance += amount
+            print(f'{amount} Successfully deposited into {self.__name} Account.')
             self.show_balance()
             self.transaction_list.append((Account._current_time(), amount))
 
     def withdraw(self, amount):
-        if 0 < amount <= self.balance:
-            self.balance -= amount
-            print(f'{amount} Successfully withdrawn from {self.name} Account.')
+        if 0 < amount <= self.__balance:
+            self.__balance -= amount
+            print(f'{amount} Successfully withdrawn from {self.__name} Account.')
             self.show_balance()
             self.transaction_list.append((Account._current_time(), -amount))
         else:
@@ -35,7 +35,7 @@ class Account:
             self.show_balance()
 
     def show_balance(self):
-        print(f'Current Balance is: {self.balance}')
+        print(f'Current Balance is: {self.__balance}')
 
     def show_transactions(self):
         for date, amount in self.transaction_list:
@@ -53,7 +53,7 @@ luq.show_balance()
 luq.deposit(3000)
 luq.show_balance()
 print('code: luq.balance = 0.1 #hacker attack')
-luq.balance = 0.1
+luq.__balance = 0.1
 luq.withdraw(4000)
 luq.withdraw(2340)
 
