@@ -7,7 +7,7 @@ class Account:
     """Account is i"""
 
     @staticmethod
-    def _current_time():                    # _infornt of name make it hidden
+    def _current_time():                    # _ in front of name make it hidden
         utc_time = datetime.datetime.utcnow()
         return pytz.utc.localize(utc_time)
 
@@ -15,6 +15,7 @@ class Account:
         self.name = name
         self.balance = balance
         self.transaction_list = []
+        self.transaction_list.append((Account._current_time(), balance))
         print(f'Account Created For {self.name} with Initial Balance: {self.balance}')
 
     def deposit(self, amount):
