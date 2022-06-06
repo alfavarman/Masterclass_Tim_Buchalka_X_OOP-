@@ -1,7 +1,7 @@
 class Song:
     """Class to represent a song.
 
-     attributes:
+     Attributes:
         title(str): song's title
         artist(str): name of artist responsible for representing song
         duration(int): duration of song, 0 if not specified
@@ -107,8 +107,6 @@ def load_data():
                 new_artist.add_album(new_album)
             artist_list.append(new_artist)
     return artist_list
-
-
 
 
 if __name__ == '__main__':
