@@ -14,8 +14,7 @@ class Account:
     def __init__(self, name, balance):
         self.name = name
         self.balance = balance
-        self.transaction_list = []
-        self.transaction_list.append((Account._current_time(), balance))
+        self.transaction_list = [(Account._current_time(), balance)]
         print(f'Account Created For {self.name} with Initial Balance: {self.balance}')
 
     def deposit(self, amount):
