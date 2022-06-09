@@ -117,8 +117,6 @@ def create_checkfile(artist_list):
                     print(f'{new_artist}\t{new_album}\t{new_song}', file=checkfile)
 
 
-
-
 if __name__ == '__main__':
     artists = load_data()
     print(f'There are {len(artists)} artists.')
